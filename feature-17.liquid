@@ -1,0 +1,966 @@
+{% for block in section.blocks %}
+  {% if block.type == 'heading' %}
+    <link
+      href="https://fonts.googleapis.com/css2?family={{ block.settings.heading_font.family | replace: '"', '' | replace: ' ', '+' }}&display=swap"
+      rel="stylesheet"
+    >
+  {% endif %}
+  {% if block.type == 'description' %}
+    <link
+      href="https://fonts.googleapis.com/css2?family={{ block.settings.description_font.family | replace: '"', '' | replace: ' ', '+' }}&display=swap"
+      rel="stylesheet"
+    >
+  {% endif %}
+  {% if block.type == 'featured_items' %}
+    <link
+      href="https://fonts.googleapis.com/css2?family={{ block.settings.card_heading_font.family | replace: '"', '' | replace: ' ', '+' }}&display=swap"
+      rel="stylesheet"
+    >
+    <link
+      href="https://fonts.googleapis.com/css2?family={{ block.settings.card_description_font.family | replace: '"', '' | replace: ' ', '+' }}&display=swap"
+      rel="stylesheet"
+    >
+  {% endif %}
+{% endfor %}
+<style>
+          .body-parent-{{ section.id }} *,
+          .body-parent-{{ section.id }} *::before,
+          .body-parent-{{ section.id }} *::after {
+            box-sizing: border-box !important;
+          }
+
+          .body-parent-{{ section.id }} h1,
+          .body-parent-{{ section.id }} h2,
+          .body-parent-{{ section.id }} h3,
+          .body-parent-{{ section.id }} h4,
+          .body-parent-{{ section.id }} h5,
+          .body-parent-{{ section.id }} p,
+          .body-parent-{{ section.id }} .h0,
+          .body-parent-{{ section.id }} .h1,
+          .body-parent-{{ section.id }} .h2,
+          .body-parent-{{ section.id }} .h3,
+          .body-parent-{{ section.id }} .h4,
+          .body-parent-{{ section.id }} .h5 {
+            margin: 0;
+            padding: 0;
+            color: unset;
+            text-transform: none !important;
+          }
+
+          .body-parent-{{ section.id }} a:empty,
+          .body-parent-{{ section.id }} ul:empty,
+          .body-parent-{{ section.id }} dl:empty,
+          .body-parent-{{ section.id }} div:empty,
+          .body-parent-{{ section.id }} section:empty,
+          .body-parent-{{ section.id }} article:empty,
+          .body-parent-{{ section.id }} p:empty,
+          .body-parent-{{ section.id }} h1:empty,
+          .body-parent-{{ section.id }} h2:empty,
+          .body-parent-{{ section.id }} h3:empty,
+          .body-parent-{{ section.id }} h4:empty,
+          .body-parent-{{ section.id }} h5:empty,
+          .body-parent-{{ section.id }} h6:empty {
+            display: block;
+          }
+
+          img {
+            max-width: 100%;
+            display: block;
+          }
+
+          .body-parent-{{ section.id }} {
+            font-family: {% if section.settings.check_box and section.settings.title_font.family %}{{ section.settings.title_font.family }}, sans-serif{% else %}Inter, sans-serif{% endif %};
+            font-size: 16px;
+            line-height: 26px;
+            font-weight: 400;
+            color: #000;
+            background: #fff;
+            margin: 0;
+            overflow-x: hidden;
+          }
+
+          .lpd-features-17-container-{{ section.id }} {
+            max-width: 1400px;
+            padding: {{ section.settings.padding_vertical }}px {{ section.settings.padding_horizontal }}px;
+            margin: 0 auto;
+            background: {{ section.settings.section_bg_color }};
+          }
+
+          @media(max-width: 600px) {
+            .lpd-features-17-container-{{ section.id }} {
+              padding: {{ section.settings.padding_vertical_mobile }}px {{ section.settings.padding_horizontal_mobile }}px;
+            }
+          }
+
+          .lpd-features-17-hidden-desktop-{{ section.id }} {
+            display: none;
+          }
+
+          .lpd-features-17-features-{{ section.id }} {
+            padding: 120px 0;
+          }
+
+          .lpd-features-17-features-row-{{ section.id }} {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: {{ section.settings.section_gap }}px;
+            {% if section.settings.image_position == 'right' %}
+              flex-direction: row;
+            {% else %}
+              flex-direction: row-reverse;
+            {% endif %}
+          }
+
+          .lpd-features-17-feature-ct-col-{{ section.id }} {
+            width: 48%;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+          }
+
+          .lpd-features-17-features-heading-{{ section.id }} {
+            max-width: 556px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+          }
+
+
+          .lpd-features-17-features-heading-{{ section.id }} h2 {
+            {% for block in section.blocks %}
+        {% if block.type == 'heading' %}
+           font-size: {{ block.settings.heading_font_size }};
+             {% endif %}
+      {% endfor %}
+            line-height: 130%;
+            font-weight: 700;
+    }
+
+          .lpd-features-17-features-heading-{{ section.id }} p {
+           font-size:18px;
+            line-height: 130%;
+          }
+
+          .lpd-features-17-features-list-{{ section.id }} {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+          }
+
+          .lpd-features-17-feature-list-item-{{ section.id }} {
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+            padding: 0 0 25px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+          }
+
+          .lpd-features-17-feature-icon-{{ section.id }} {
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 100px;
+          }
+
+          .lpd-features-17-feature-icon-{{ section.id }} img {
+            object-fit: contain;
+          }
+
+          .lpd-features-17-feature-info-{{ section.id }} {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+          }
+
+          .lpd-features-17-feature-info-{{ section.id }} h3 {
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 130%;
+          }
+
+          .lpd-features-17-feature-list-item-{{ section.id }}.last {
+            padding: 0;
+            border-bottom: 0;
+          }
+
+          .lpd-features-17-feature-img-col-{{ section.id }} {
+            width: 45%;
+          }
+
+          .lpd-features-17-feature-img-col-{{ section.id }} img {
+            width: {{ section.settings.img_col_width }}%;
+            border-radius: {{ section.settings.image_roundness }}px;
+            height: {{ section.settings.img_fixed_height }}rem;
+            border: {{ section.settings.thickness }}px {{ section.settings.border_style }} {{ section.settings.border_color }};
+            object-fit: {{ section.settings.media_fit }};
+          }
+          @media(max-width:600px){
+            .lpd-features-17-feature-img-col-{{ section.id }} img{
+            height:{{ section.settings.img_fixed_height_mobile }}px;
+            width:{{ section.settings.img_col_width_mobile }}%;
+            object-fit:{{ section.settings.media_fit_mobile }};
+            }
+
+          }
+
+          .lpd-features-17-feature-img-col-{{ section.id }} video {
+            width: {{ section.settings.img_col_width }}%;
+            border-radius: {{ section.settings.image_roundness }}px;
+            height: {{ section.settings.img_fixed_height }}rem;
+            border: {{ section.settings.thickness }}px solid {{ section.settings.border_color }};
+            object-fit: {{ section.settings.media_fit }};
+          }
+
+
+          @media (max-width: 992px) {
+            .lpd-features-17-hidden-desktop-{{ section.id }} {
+              display: block;
+            }
+            .lpd-features-17-hidden-mobile-{{ section.id }} {
+              display: none;
+            }
+          }
+
+          @media (max-width: 768px) {
+            .lpd-features-17-features-row-{{ section.id }} {
+              flex-direction: column;
+              gap: {{ section.settings.section_gap_mobile }}px;
+              {% if section.settings.image_position_mobile == 'bottom' %}
+                flex-direction: column;
+              {% else %}
+                flex-direction: column-reverse;
+              {% endif %}
+            }
+            .lpd-features-17-feature-ct-col-{{ section.id }},
+            .lpd-features-17-feature-img-col-{{ section.id }} {
+              width: 100%;
+            }
+          }
+
+          @media (max-width: 479px) {
+      .lpd-features-17-features-{{ section.id }} {
+        padding: 50px 0;
+      }
+         @media (max-width: 479px){
+  {% for block in section.blocks %}
+        {% if block.type == 'heading' %}
+          .lpd-features-17-features-heading-{{ section.id }} h2 {
+
+            font-size: {{ block.settings.heading_font_size_mobile }};
+          }
+
+        {% endif %}
+      {% endfor %}
+    }
+  }
+</style>
+
+<div class="body-parent-{{ section.id }}">
+  <section class="lpd-features-17-features-{{ section.id }}">
+    <div class="lpd-features-17-container-{{ section.id }}">
+      <div class="lpd-features-17-features-row-{{ section.id }}">
+        <div class="lpd-features-17-feature-ct-col-{{ section.id }}">
+          <div class="lpd-features-17-features-heading-{{ section.id }}">
+            {% for block in section.blocks %}
+              {% if block.type == 'heading' %}
+                <h2 style="font-family: {% if block.settings.check_box==true %}{{ block.settings.heading_font.family | replace: '"', '' }}, sans-serif{% else %}'Inter', sans-serif{% endif %}; color: {{ block.settings.heading_text_color }}; ">
+                  {{ block.settings.heading_text }}
+                </h2>
+              {% endif %}
+
+              {% if block.type == 'description' %}
+                <p style="font-family: {% if block.settings.Check_box==true %}{{ block.settings.description_font.family | replace: '"', '' }}, sans-serif{% else %}'Inter', sans-serif{% endif %};; color: {{ block.settings.description_text_color }};  font-size: {{ block.settings.description_font_size }};">
+                  {{ block.settings.description_text }}
+                </p>
+              {% endif %}
+            {% endfor %}
+          </div>
+
+          <div class="lpd-features-17-features-list-{{ section.id }}">
+            {% assign feature_count = 0 %}
+            {% assign total_features = 0 %}
+
+            <!-- Count total featured items first -->
+            {% for block in section.blocks %}
+              {% if block.type == 'featured_items' %}
+                {% assign total_features = total_features | plus: 1 %}
+              {% endif %}
+            {% endfor %}
+
+            {% for block in section.blocks %}
+              {% if block.type == 'featured_items' %}
+                {% assign feature_count = feature_count | plus: 1 %}
+                {% assign is_last = false %}
+                {% if feature_count == total_features %}
+                  {% assign is_last = true %}
+                {% endif %}
+
+                <div class="lpd-features-17-feature-list-item-{{ section.id }}{% if is_last %} last{% endif %}">
+                  <div
+                    class="lpd-features-17-feature-icon-{{ section.id }}"
+                    style="
+                      width: {{ block.settings.icon_size }}px;
+                      height: {{ block.settings.icon_size }}px;
+                      background: {{ block.settings.icon_bg_color }};
+                    "
+                  >
+                    {% assign icon_url = '' %}
+
+                    {% comment %} Check for uploaded image first {% endcomment %}
+                    {% if block.settings.icons_image %}
+                      {% assign icon_url = block.settings.icons_image_url %}
+                      {% comment %} Finally use default working icon {% endcomment %}
+                    {% else %}
+                      {% assign icon_url = 'https://augustodomingos.com.br/shopify-components/features-17/img/check.svg' %}
+                    {% endif %}
+
+                    <img
+                      src="{{ icon_url }}"
+                      alt="{{ block.settings.featured_heading_text | default: 'Feature icon' }}"
+                      width=""
+                      height=""
+                      style="
+                        width: {{ block.settings.icon_img_size }}px;
+                        height: {{ block.settings.icon_img_size }}px;
+                      "
+                    >
+                  </div>
+
+                  <div class="lpd-features-17-feature-info-{{ section.id }}">
+                    <h3 style="font-family: {% if block.settings.Check_Box==true %}{{ block.settings.card_heading_font.family | replace: '"', '' }}, sans-serif{% else %}'Inter', sans-serif{% endif %}; color: {{ block.settings.featured_heading_color }}; font-size: {{ block.settings.featured_heading_size }};">
+                      {{ block.settings.featured_heading_text }}
+                    </h3>
+                    <p style="font-family: {% if block.settings.check_Box==true %}{{ block.settings.card_description_font.family | replace: '"', '' }}, sans-serif{% else %}'Inter', sans-serif{% endif %}; color: {{ block.settings.featured_description_color }}; font-size: {{ block.settings.featured_description_size }};">
+                      {{ block.settings.featured_description_text }}
+                    </p>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="lpd-features-17-feature-img-col-{{ section.id }}">
+          <div class="lpd-features-17-hidden-mobile-{{ section.id }}">
+            {% if section.settings.type == 'video' %}
+              {% if section.settings.section_video %}
+                {{
+                  section.settings.section_video
+                  | video_tag: autoplay: true, muted: true, loop: true, class: 'lpd-features-17-feature-img-col-img-'
+                  | append: section.id
+                }}
+              {% else %}
+                <video
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  class="lpd-features-17-feature-img-col-video-{{ section.id }}"
+                  src="https://cdn.shopify.com/videos/c/o/v/fbb140fd46e3429eba459e1549dbbe38.mp4"
+                ></video>
+              {% endif %}
+            {% else %}
+              {% if section.settings.section_image %}
+                <img
+                  src="{{ section.settings.section_image | image_url: width: 4000 }}"
+                  width=""
+                  height=""
+                  class="lpd-features-17-feature-img-col-img-{{ section.id }}"
+                  alt="Feature image"
+                >
+              {% else %}
+                <img
+                  src="https://augustodomingos.com.br/shopify-components/features-17/img/feature-img.jpg"
+                  width=""
+                  height=""
+                  class="lpd-features-17-feature-img-col-img-{{ section.id }}"
+                  alt="Feature image"
+                >
+              {% endif %}
+            {% endif %}
+          </div>
+
+          <div class="lpd-features-17-hidden-desktop-{{ section.id }}" style="height: 100%;">
+            {% if section.settings.type == 'video' %}
+              {% if section.settings.section_video_mobile %}
+                {{
+                  section.settings.section_video_mobile
+                  | video_tag:
+                    autoplay: true,
+                    muted: true,
+                    loop: true,
+                    playsinline: 'playsinline',
+                    class: 'lpd-features-17-feature-img-col-video-'
+                  | append: section.id
+                }}
+              {% else %}
+                <video
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  class="lpd-features-17-feature-img-col-video-{{ section.id }}"
+                  src="https://cdn.shopify.com/videos/c/o/v/fbb140fd46e3429eba459e1549dbbe38.mp4"
+                ></video>
+              {% endif %}
+            {% else %}
+              {% if section.settings.section_image_mobile %}
+                <img
+                  src="{{ section.settings.section_image_mobile | image_url: width: 4000 }}"
+                  width=""
+                  height=""
+                  class="lpd-features-17-feature-img-col-img-{{ section.id }}"
+                  alt="Feature image"
+                >
+              {% else %}
+                <img
+                  src="https://augustodomingos.com.br/shopify-components/features-17/img/feature-img.jpg"
+                  width=""
+                  height=""
+                  class="lpd-features-17-feature-img-col-img-{{ section.id }}"
+                  alt="Feature image"
+                >
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+{% schema %}
+{
+  "name": "LPD Feature 17",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section"
+    },
+
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Position"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Media Position (Desktop)",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "select",
+      "id": "image_position_mobile",
+      "label": "Media Position (Mobile)",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "bottom"
+    },
+    {
+      "type": "header",
+      "content": "Section Gap"
+    },
+    {
+      "type": "range",
+      "id": "section_gap",
+      "label": "Gap (Desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 5,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_gap_mobile",
+      "label": "Gap (Mobile)",
+      "min": 0,
+      "max": 90,
+      "step": 2,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Media Desktop"
+    },
+    {
+      "type": "select",
+      "id": "type",
+      "label": "Media Type",
+      "options": [
+        {
+          "value": "img",
+          "label": "Image"
+        },
+        {
+          "value": "video",
+          "label": "Video"
+        }
+      ],
+      "default": "img"
+    },
+    {
+      "type": "video",
+      "id": "section_video",
+      "label": "Section Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "section_image",
+      "label": "Section Image"
+    },
+    {
+      "type": "range",
+      "id": "img_fixed_height",
+      "label": "Media Fixed Height",
+      "min": 20,
+      "max": 120,
+      "step": 1,
+      "default": 68,
+      "unit": "rem"
+    },
+    {
+      "type": "range",
+      "id": "img_col_width",
+      "label": "Media Width",
+      "min": 20,
+      "max": 100,
+      "step": 1,
+      "default": 100,
+      "unit": "%"
+    },
+    {
+      "type": "select",
+      "id": "media_fit",
+      "label": "Media Fit",
+      "options": [
+        {
+          "value": "contain",
+          "label": "Contain"
+        },
+        {
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "value": "fill",
+          "label": "Fill"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "header",
+      "content": "Media Mobile"
+    },
+    {
+      "type": "video",
+      "id": "section_video_mobile",
+      "label": "Section Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "section_image_mobile",
+      "label": "Section Image"
+    },
+    {
+      "type": "range",
+      "id": "img_fixed_height_mobile",
+      "label": "Media Fixed Height",
+      "min": 100,
+      "max": 1200,
+      "step": 20,
+      "default": 700,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "img_col_width_mobile",
+      "label": "Media Width",
+      "min": 20,
+      "max": 100,
+      "step": 1,
+      "default": 100,
+      "unit": "%"
+    },
+    {
+      "type": "select",
+      "id": "media_fit_mobile",
+      "label": "Media Fit",
+      "options": [
+        {
+          "value": "contain",
+          "label": "Contain"
+        },
+        {
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "value": "fill",
+          "label": "Fill"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "header",
+      "content": "Padding (Desktop)"
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical",
+      "label": "Padding Vertical",
+      "default": 100,
+      "min": 0,
+      "step": 2,
+      "unit": "px",
+      "max": 200
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "label": "Padding Horizontal",
+      "default": 20,
+      "min": 0,
+      "step": 2,
+      "unit": "px",
+      "max": 120
+    },
+    {
+      "type": "header",
+      "content": "Padding (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical_mobile",
+      "label": "Padding Vertical",
+      "default": 50,
+      "min": 0,
+      "step": 2,
+      "unit": "px",
+      "max": 150
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal_mobile",
+      "label": "Padding Horizontal",
+      "default": 20,
+      "min": 0,
+      "step": 2,
+      "unit": "px",
+      "max": 120
+    },
+    {
+      "type": "header",
+      "content": "Image Border"
+    },
+    {
+      "type": "range",
+      "id": "image_roundness",
+      "label": "Roundness",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "thickness",
+      "label": "Thickness",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "border_style",
+      "label": "Border Style",
+      "default": "solid",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "dashed", "label": "Dashed" },
+        { "value": "dotted", "label": "Dotted" },
+        { "value": "double", "label": "Double" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border Color",
+      "default": "#000"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "font_picker",
+          "id": "heading_font",
+          "label": "Font Family",
+          "default": "sans-serif"
+        },
+        {
+          "type": "checkbox",
+          "id": "check_box",
+          "label": "Use Custom Fonts",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "heading_text",
+          "label": "Text",
+          "default": "The Most Delicious Meal Replacement."
+        },
+        {
+          "type": "color",
+          "id": "heading_text_color",
+          "label": "Text Color",
+          "default": "#000"
+        },
+        {
+          "type": "select",
+          "id": "heading_font_size",
+          "label": "Font Size(Desktop)",
+          "options": [
+            { "value": "44px", "label": "Sm" },
+            { "value": "52px", "label": "Md" },
+            { "value": "60px", "label": "Lg" }
+          ],
+          "default": "52px"
+        },
+        {
+          "type": "select",
+          "id": "heading_font_size_mobile",
+          "label": "Font Size (Mobile)",
+          "options": [
+            { "value": "24px", "label": "Sm" },
+            { "value": "32px", "label": "Md" },
+            { "value": "40px", "label": "Lg" }
+          ],
+          "default": "32px"
+        }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "settings": [
+        {
+          "type": "font_picker",
+          "id": "description_font",
+          "label": "Font Family",
+          "default": "sans-serif"
+        },
+        {
+          "type": "checkbox",
+          "id": "Check_box",
+          "label": "Use Custom Fonts",
+          "default": false
+        },
+        {
+          "type": "inline_richtext",
+          "id": "description_text",
+          "label": "Description",
+          "default": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the."
+        },
+        {
+          "type": "color",
+          "id": "description_text_color",
+          "label": "Text Color",
+          "default": "#000"
+        },
+        {
+          "type": "select",
+          "id": "description_font_size",
+          "label": "Font Size",
+          "options": [
+            { "value": "14px", "label": "Sm" },
+            { "value": "18px", "label": "Md" },
+            { "value": "22px", "label": "Lg" }
+          ],
+          "default": "18px"
+        }
+      ]
+    },
+    {
+      "type": "featured_items",
+      "name": "Featured Item",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Icon"
+        },
+
+        {
+          "type": "url",
+          "id": "icons_image_url",
+          "label": "Icon Image URL",
+          "info": "Enter a valid image URL as fallback"
+        },
+        {
+          "type": "range",
+          "id": "icon_size",
+          "label": "Icon Container Size",
+          "min": 30,
+          "max": 100,
+          "step": 2,
+          "default": 50,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "icon_img_size",
+          "label": "Icon Image Size",
+          "min": 16,
+          "max": 80,
+          "step": 2,
+          "default": 24,
+          "unit": "px"
+        },
+
+        {
+          "type": "color",
+          "id": "icon_bg_color",
+          "label": "Icon Background Color",
+          "default": "#000000"
+        },
+        {
+          "type": "header",
+          "content": "Featured Heading"
+        },
+        {
+          "type": "font_picker",
+          "id": "card_heading_font",
+          "label": "Font Family",
+          "default": "sans-serif"
+        },
+        {
+          "type": "checkbox",
+          "id": "Check_Box",
+          "label": "Use Custom Fonts",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "featured_heading_text",
+          "label": "Text",
+          "default": "Title Feature Here"
+        },
+        {
+          "type": "color",
+          "id": "featured_heading_color",
+          "label": "Text Color",
+          "default": "#000"
+        },
+        {
+          "type": "select",
+          "id": "featured_heading_size",
+          "label": "Font Size",
+          "options": [
+            { "value": "16px", "label": "Sm" },
+            { "value": "20px", "label": "Md" },
+            { "value": "24px", "label": "Lg" }
+          ],
+          "default": "20px"
+        },
+        {
+          "type": "header",
+          "content": "Featured Description"
+        },
+        {
+          "type": "font_picker",
+          "id": "card_description_font",
+          "label": "Font Family",
+          "default": "sans-serif"
+        },
+        {
+          "type": "checkbox",
+          "id": "check_Box",
+          "label": "Use Custom Fonts",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "featured_description_text",
+          "label": "Text",
+          "default": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the."
+        },
+        {
+          "type": "color",
+          "id": "featured_description_color",
+          "label": "Text Color",
+          "default": "#000"
+        },
+        {
+          "type": "select",
+          "id": "featured_description_size",
+          "label": "Font Size",
+          "options": [
+            { "value": "11px", "label": "Sm" },
+            { "value": "16px", "label": "Md" },
+            { "value": "21px", "label": "Lg" }
+          ],
+          "default": "16px"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "LPD Feature 17",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "description"
+        },
+        {
+          "type": "featured_items"
+        },
+        {
+          "type": "featured_items"
+        },
+        {
+          "type": "featured_items"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
